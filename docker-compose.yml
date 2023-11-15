@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: locker-manager-backend
+    depends_on:
+      - db
+    links:
+      - db:app_db
+    ports:
+      - "43001:8080"
+    restart: always
+
+  db:
+    image: mysql/mysql-server:8.0
+    container_name: locker-manager-db
+    environment:
+      MYSQL_DATABASE: 9mkXRgaYJ3QyA8PY3zyMmvXjeMFPJY_db
+      MYSQL_USER: 35tfPRcUCnszkqtiEhpat8TnHkbt34_user
+      MYSQL_PASSWORD: GjMcGwqz7E3B88CgDwTfrC3GaYnfQf
+      TZ: 'Asia/Seoul'
+    restart: always
+    volumes:
+      - locker-manager-db:/var/lib/mysql
+
+volumes:
+  locker-manager-db:
