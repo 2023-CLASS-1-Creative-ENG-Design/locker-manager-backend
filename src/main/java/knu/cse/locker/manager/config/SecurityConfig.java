@@ -3,9 +3,9 @@ package knu.cse.locker.manager.config;
 import knu.cse.locker.manager.account.repository.AccountRepository;
 import knu.cse.locker.manager.security.filter.JwtAuthenticationFilter;
 import knu.cse.locker.manager.security.provider.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,8 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
-import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
