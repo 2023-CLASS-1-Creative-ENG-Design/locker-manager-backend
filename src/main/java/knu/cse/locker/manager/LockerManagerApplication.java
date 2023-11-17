@@ -1,13 +1,13 @@
-package knu.cse.locker.manager.lockermanagerbackend;
+package knu.cse.locker.manager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LockerManagerBackendApplication {
+public class LockerManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LockerManagerBackendApplication.class, args);
+		SpringApplication.run(LockerManagerApplication.class, args);
 	}
 
 }

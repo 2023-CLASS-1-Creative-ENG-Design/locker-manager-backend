@@ -9,22 +9,22 @@ services:
     depends_on:
       - db
     links:
-      - db:app_db
+      - db:locker_manager_db
     ports:
       - "43001:8080"
     restart: always
 
   db:
     image: mysql/mysql-server:8.0
-    container_name: locker-manager-db
+    container_name: locker-manager-mysql
     environment:
-      MYSQL_DATABASE: 9mkXRgaYJ3QyA8PY3zyMmvXjeMFPJY_db
-      MYSQL_USER: 35tfPRcUCnszkqtiEhpat8TnHkbt34_user
+      MYSQL_DATABASE: PyJGKBcEaamwXQYH6sXs_db
+      MYSQL_USER: mRMnzx3tHZhTZxfiNJ75_user
       MYSQL_PASSWORD: GjMcGwqz7E3B88CgDwTfrC3GaYnfQf
       TZ: 'Asia/Seoul'
     restart: always
     volumes:
-      - locker-manager-db:/var/lib/mysql
+      - locker-manager-mysql:/var/lib/mysql
 
 volumes:
-  locker-manager-db:
+  locker-manager-mysql:
