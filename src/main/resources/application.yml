@@ -7,16 +7,12 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://app_db:3306/9mkXRgaYJ3QyA8PY3zyMmvXjeMFPJY_db
-    username: 35tfPRcUCnszkqtiEhpat8TnHkbt34_user
+    url: jdbc:mysql://locker_manager_db:3306/PyJGKBcEaamwXQYH6sXs_db
+    username: mRMnzx3tHZhTZxfiNJ75_user
     password: GjMcGwqz7E3B88CgDwTfrC3GaYnfQf
 
-#
-#  jwt:
-#    secret: VY8bBm7p93fC2SZJ6bZBeJHQZKvHfHTVJhdXjC9TGg8KLYooLXL4SvHcGfAf
-#
-#  chain:
-#    api-token:
+  jwt:
+    secret: EMQzjJhWofnR3AMWYNrKwhYuVcDB9ZCmJdXHssUE6CxUZ5unG6nWevjUvSxm
 
 server:
   servlet:
