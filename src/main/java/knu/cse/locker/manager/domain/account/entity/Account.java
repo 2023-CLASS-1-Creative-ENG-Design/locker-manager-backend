@@ -1,5 +1,6 @@
 package knu.cse.locker.manager.domain.account.entity;
 
+import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.record.entity.LockerStatusRecord;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @note 사용자 계정의 정보를 담은 ENTITY
+ * *
  * schoolNumber 학번
  * password 비밀번호
  * role 역할
@@ -44,8 +47,16 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LockerStatusRecord> records = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "locker_id")
+    private Locker locker;
+
+    public void assignLocker(Locker locker) {
+        this.locker = locker;
+    }
+
     @Builder
-    public Account(Long id, String schoolNumber, String password, Role role, String email, String phoneNumber, String name, List<LockerStatusRecord> records) {
+    public Account(Long id, String schoolNumber, String password, Role role, String email, String phoneNumber, String name, List<LockerStatusRecord> records, Locker locker) {
         this.id = id;
         this.schoolNumber = schoolNumber;
         this.password = password;
@@ -54,5 +65,6 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.records = records;
+        this.locker = locker;
     }
 }

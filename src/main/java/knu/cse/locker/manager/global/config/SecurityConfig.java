@@ -37,6 +37,9 @@ public class SecurityConfig {
 
         httpSecurity
                 .authorizeRequests()
+                    .antMatchers("/api/v1/admin/**").hasAnyRole("MANAGER")
+                    .antMatchers("/api/v1/records/**").hasAnyRole("USER", "MANAGER")
+                    .antMatchers("/api/v1/lockers/**").hasAnyRole("USER", "MANAGER")
                     .antMatchers("/api/v1/auth/**", "/swagger-ui/**").permitAll();
 
         httpSecurity

@@ -1,5 +1,7 @@
 package knu.cse.locker.manager.domain.auth.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.service.AccountService;
 import knu.cse.locker.manager.domain.auth.dto.TokenDto;
 import knu.cse.locker.manager.domain.auth.dto.request.LoginRequestDto;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Tag(name = "사용자 인증")
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class AuthController {
     private final AuthService authService;
     private final AccountService accountService;
     @PostMapping("/register")
+    @Operation(summary = "사용자 회원가입")
     public ApiUtil.ApiSuccessResult<Long> signUp(
             @Valid @RequestBody RegisterRequestDto requestDto
     ){
@@ -29,6 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "사용자 로그인")
     public ApiUtil.ApiSuccessResult<ResponseEntity<LoginResponseDto>> login(
             @Valid @RequestBody LoginRequestDto loginRequestDto
     ){
@@ -46,6 +51,7 @@ public class AuthController {
     }
 
     @GetMapping("/email-valid")
+    @Operation(summary = "이메일 중복 확인")
     public ApiUtil.ApiSuccessResult<String> isValidEmail(
             @RequestParam("email") String email
     ) {
@@ -57,6 +63,7 @@ public class AuthController {
     }
 
     @GetMapping("/school-num-valid")
+    @Operation(summary = "학번 중복 확인")
     public ApiUtil.ApiSuccessResult<String> isValidSchoolNumber(
             @RequestParam("school-num") String schoolNumber
     ) {

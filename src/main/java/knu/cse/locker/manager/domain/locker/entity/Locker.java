@@ -12,6 +12,8 @@ import java.util.List;
 
 
 /**
+ * @note 사물함 정보 및 상태를 관리 하는 ENTITY
+ * *
  * lockerLocation 사물함 위치
  * lockerNumber 사물함 번호
  * lockerPassword 사물함 비밀번호
@@ -24,6 +26,7 @@ import java.util.List;
 public class Locker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "locker_id", unique = true)
     private Long id;
 
     private LockerLocation lockerLocation;
