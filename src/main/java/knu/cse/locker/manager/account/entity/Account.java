@@ -1,5 +1,6 @@
 package knu.cse.locker.manager.account.entity;
 
+import knu.cse.locker.manager.record.entity.LockerStatusRecord;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +8,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * schoolNumber 학번
+ * password 비밀번호
+ * role 역할
+ * email 이메일
+ * phoneNumber 휴대폰 전화번호
+ * name 이름
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,7 +30,7 @@ public class Account {
     private Long id;
 
     @Column(unique = true)
-    private String schoolNum; // 학번
+    private String schoolNumber;
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -27,17 +38,21 @@ public class Account {
 
     @Email @Column(unique = true)
     private String email;
-    private String phoneNum; // 전번
-    private String name; // 이름
+    private String phoneNumber;
+    private String name;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LockerStatusRecord> records = new ArrayList<>();
 
     @Builder
-    public Account(Long id, String schoolNum, String password, Role role, String email, String phoneNum, String name) {
+    public Account(Long id, String schoolNumber, String password, Role role, String email, String phoneNumber, String name, List<LockerStatusRecord> records) {
         this.id = id;
-        this.schoolNum = schoolNum;
+        this.schoolNumber = schoolNumber;
         this.password = password;
         this.role = role;
         this.email = email;
-        this.phoneNum = phoneNum;
+        this.phoneNumber = phoneNumber;
         this.name = name;
+        this.records = records;
     }
 }

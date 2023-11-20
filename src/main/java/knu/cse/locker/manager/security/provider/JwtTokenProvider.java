@@ -70,7 +70,7 @@ public class JwtTokenProvider {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        Account account = accountRepository.findBySchoolNum(claims.getSubject())
+        Account account = accountRepository.findBySchoolNumber(claims.getSubject())
                 .orElseThrow(() -> new UsernameNotFoundException("계정을 찾을 수 없습니다."));
 
         return new UsernamePasswordAuthenticationToken(new PrincipalDetails(account), "", authorities);

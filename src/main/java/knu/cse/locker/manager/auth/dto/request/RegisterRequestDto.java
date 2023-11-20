@@ -13,20 +13,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class RegisterRequestDto {
-    private String schoolNum;
+    private String schoolNumber;
     private String password;
     private String name;
     private String email;
-    private String phoneNum;
+    private String phoneNumber;
 
     public Account toEntity(PasswordEncoder passwordEncoder, Role role){
         return Account.builder()
-                .schoolNum(this.schoolNum)
+                .schoolNumber(this.schoolNumber)
                 .password(passwordEncoder.encode(this.password))
                 .role(role)
                 .name(this.name)
                 .email(this.email)
-                .phoneNum(this.phoneNum)
+                .phoneNumber(this.phoneNumber)
                 .build();
     }
 }

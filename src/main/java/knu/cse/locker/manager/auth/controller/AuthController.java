@@ -32,9 +32,9 @@ public class AuthController {
     public ApiUtil.ApiSuccessResult<ResponseEntity<LoginResponseDto>> login(
             @Valid @RequestBody LoginRequestDto loginRequestDto
     ){
-        String schoolNum = loginRequestDto.getSchoolNum();
+        String schoolNumber = loginRequestDto.getSchoolNumber();
         String password = loginRequestDto.getPassword();
-        LoginResponseDto loginResponseDto = authService.login(schoolNum, password);
+        LoginResponseDto loginResponseDto = authService.login(schoolNumber, password);
 
         TokenDto tokenDto = loginResponseDto.getTokenDto();
 
@@ -57,10 +57,10 @@ public class AuthController {
     }
 
     @GetMapping("/school-num-valid")
-    public ApiUtil.ApiSuccessResult<String> isValidSchoolNum(
-            @RequestParam("school-num") String schoolNum
+    public ApiUtil.ApiSuccessResult<String> isValidSchoolNumber(
+            @RequestParam("school-num") String schoolNumber
     ) {
-        if (accountService.isAccountBySchoolNum(schoolNum)) {
+        if (accountService.isAccountBySchoolNumber(schoolNumber)) {
             throw new IllegalStateException("중복된 학번 입니다.");
         }
 

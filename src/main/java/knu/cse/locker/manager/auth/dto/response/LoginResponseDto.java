@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class LoginResponseDto {
-    private String schoolNum;
+    private String schoolNumber;
 
     private String name;
     private String email;
-    private String phoneNum;
+    private String phoneNumber;
 
     private Role role;
 
@@ -26,11 +26,11 @@ public class LoginResponseDto {
     private TokenDto tokenDto;
 
     public LoginResponseDto(Account account, TokenDto tokenDto) {
-        this.schoolNum = account.getSchoolNum();
+        this.schoolNumber = account.getSchoolNumber();
 
         this.name = account.getName();
         this.email = account.getEmail();
-        this.phoneNum = account.getPhoneNum();
+        this.phoneNumber = account.getPhoneNumber();
         this.role = account.getRole();
         this.tokenDto = tokenDto;
     }

@@ -29,15 +29,15 @@ public class AuthService {
     private final AccountService accountService;
 
 
-    public LoginResponseDto login(String schoolNum, String password){
+    public LoginResponseDto login(String schoolNumber, String password){
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(schoolNum, password);
+                new UsernamePasswordAuthenticationToken(schoolNumber, password);
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         TokenDto tokenDto = jwtTokenProvider.generateTokenDto(authentication);
 
-        Account account = accountRepository.findBySchoolNum(schoolNum)
+        Account account = accountRepository.findBySchoolNumber(schoolNumber)
                 .orElseThrow(() -> new NotFoundException("계정이 존재하지 않습니다."));
 
         return new LoginResponseDto(account, tokenDto);
@@ -49,7 +49,7 @@ public class AuthService {
             throw new IllegalStateException("중복된 이메일 입니다.");
         }
 
-        if(accountService.isAccountBySchoolNum(requestDto.getSchoolNum())){
+        if(accountService.isAccountBySchoolNumber(requestDto.getSchoolNumber())){
             throw new IllegalStateException("중복된 학번 입니다.");
         }
 

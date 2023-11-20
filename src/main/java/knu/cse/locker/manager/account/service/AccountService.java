@@ -16,7 +16,7 @@ public class AccountService {
     }
 
 
-    public boolean isAccountBySchoolNum(String schoolNum) {
-        return accountRepository.existsBySchoolNum(schoolNum);
+    public boolean isAccountBySchoolNumber(String schoolNumber) {
+        return accountRepository.existsBySchoolNumber(schoolNumber);
     }
 }

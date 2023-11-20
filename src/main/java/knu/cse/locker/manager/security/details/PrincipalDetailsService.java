@@ -15,7 +15,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account =  accountRepository.findBySchoolNum(username)
+        Account account =  accountRepository.findBySchoolNumber(username)
                 .orElseThrow(() -> new UsernameNotFoundException("계정을 찾을 수 없습니다."));
 
         return new PrincipalDetails(account);

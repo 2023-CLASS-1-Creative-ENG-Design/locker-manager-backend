@@ -29,7 +29,7 @@ public record PrincipalDetails(Account account) implements UserDetails {
 
     @Override
     public String getUsername() {
-        return account.getSchoolNum();
+        return account.getSchoolNumber();
     }
 
     @Override

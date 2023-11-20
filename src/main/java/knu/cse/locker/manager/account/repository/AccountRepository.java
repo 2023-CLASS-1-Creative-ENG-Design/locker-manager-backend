@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    Optional<Account> findBySchoolNum(String schoolNum);
+    Optional<Account> findBySchoolNumber(String schoolNumber);
     boolean existsByEmail(String email);
-    boolean existsBySchoolNum(String email);
+    boolean existsBySchoolNumber(String email);
 }
