@@ -1,7 +1,6 @@
 package knu.cse.locker.manager.global.security.details;
 
 import knu.cse.locker.manager.domain.account.entity.Account;
-import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Getter
 public record PrincipalDetails(Account account) implements UserDetails {
+
+    public Account getAccount() {
+        return account;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

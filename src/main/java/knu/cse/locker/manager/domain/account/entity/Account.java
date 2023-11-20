@@ -39,10 +39,10 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String name;
     @Email @Column(unique = true)
     private String email;
     private String phoneNumber;
-    private String name;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LockerStatusRecord> records = new ArrayList<>();
@@ -51,8 +51,9 @@ public class Account {
     @JoinColumn(name = "locker_id")
     private Locker locker;
 
-    public void assignLocker(Locker locker) {
+    public Account assignLocker(Locker locker) {
         this.locker = locker;
+        return this;
     }
 
     @Builder

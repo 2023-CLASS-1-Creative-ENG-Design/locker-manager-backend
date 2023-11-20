@@ -22,7 +22,7 @@ public class RecordController {
     private final RecordService recordService;
 
     @PostMapping("/{status}")
-    @Operation(summary = "사물함 개폐 여부 작성")
+    @Operation(summary = "사물함 개폐 여부 작성", description = "{status} == open 또는 close")
     public ApiUtil.ApiSuccessResult<Long> saveLockerStatus (
             Authentication authentication,
             @PathVariable("status") String status) {
@@ -30,7 +30,7 @@ public class RecordController {
         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
         Account account = userDetails.getAccount();
 
-        Long record_id = recordService.saveLockerStatus(account, LockerStatus.getStatus(status));
+        Long record_id = recordService.saveLockerStatus(account, LockerStatus.of(status));
 
         return ApiUtil.success(record_id);
     }
