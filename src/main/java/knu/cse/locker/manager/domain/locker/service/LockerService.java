@@ -22,8 +22,9 @@ public class LockerService {
 
     @Transactional
     public Long changeLockerFromAccount(Account account, final LockerChangeRequestDto requestDto) {
-        LockerLocation lockerLocation = requestDto.getLockerLocation();
-        String lockerNumber = requestDto.getLockerNumber();
+        String lockerName = requestDto.getLockerName();
+        LockerLocation lockerLocation = getLockerLocationFromName(lockerName);
+        String lockerNumber = getLockerNumberFromName(lockerName);
 
         Locker locker = lockerRepository.findByLockerLocationAndLockerNumber(lockerLocation, lockerNumber)
                         .orElseThrow(() -> new NotFoundException("Locker을 찾을 수 없습니다."));
@@ -31,5 +32,20 @@ public class LockerService {
         accountRepository.save(account.assignLocker(locker));
 
         return account.getId();
+    }
+
+    private LockerLocation getLockerLocationFromName(String lockerName) {
+        String loc_str = lockerName.split("-")[0];
+
+        return switch (loc_str.toUpperCase()) {
+            case "B1" -> LockerLocation.LOC_B1;
+            case "L" -> LockerLocation.LOC_L;
+            case "3F" -> LockerLocation.LOC_3F;
+            default -> null;
+        };
+    }
+
+    private String getLockerNumberFromName(String lockerName) {
+        return lockerName.split("-")[1];
     }
 }

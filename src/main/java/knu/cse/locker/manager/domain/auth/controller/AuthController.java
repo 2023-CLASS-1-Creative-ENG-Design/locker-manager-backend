@@ -14,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Tag(name = "사용자 인증")
@@ -35,16 +36,17 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "사용자 로그인")
     public ApiUtil.ApiSuccessResult<ResponseEntity<LoginResponseDto>> login(
-            @Valid @RequestBody LoginRequestDto loginRequestDto
+            @Valid @RequestBody LoginRequestDto loginRequestDto,
+            HttpServletResponse res
     ){
         String schoolNumber = loginRequestDto.getSchoolNumber();
         String password = loginRequestDto.getPassword();
         LoginResponseDto loginResponseDto = authService.login(schoolNumber, password);
 
         TokenDto tokenDto = loginResponseDto.getTokenDto();
-
         String authorization = tokenDto.getGrantType() + " " + tokenDto.getAccessToken();
 
+        res.setHeader(HttpHeaders.AUTHORIZATION, tokenDto.getAccessToken());
         return ApiUtil.success(ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, authorization)
                 .body(loginResponseDto));

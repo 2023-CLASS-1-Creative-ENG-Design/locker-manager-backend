@@ -40,12 +40,12 @@ public class AccountDetailsResponseDto {
     }
 
     public static AccountDetailsResponseDto of(Account account, Locker locker) {
-        LockerDto lockerDto = LockerDto.builder()
-                .lockerLocation(locker.getLockerLocation())
-                .lockerNumber(locker.getLockerNumber())
-                .lockerPassword(locker.getLockerPassword())
-                .lockerIsBroken(locker.getLockerIsBroken())
-                .build();
+        LockerDto lockerDto =
+                (locker != null) ? LockerDto.builder()
+                        .lockerLocation(locker.getLockerLocation())
+                        .lockerNumber(locker.getLockerNumber())
+                        .lockerPassword(locker.getLockerPassword())
+                        .lockerIsBroken(locker.getLockerIsBroken()).build() : null;
 
         return AccountDetailsResponseDto.builder()
                 .schoolNumber(account.getSchoolNumber())
