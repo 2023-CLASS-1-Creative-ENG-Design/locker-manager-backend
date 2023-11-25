@@ -1,6 +1,5 @@
 package knu.cse.locker.manager.domain.account.entity;
 
-import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.record.entity.LockerStatusRecord;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -47,17 +46,8 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LockerStatusRecord> records = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "locker_id")
-    private Locker locker;
-
-    public Account assignLocker(Locker locker) {
-        this.locker = locker;
-        return this;
-    }
-
     @Builder
-    public Account(Long id, String schoolNumber, String password, Role role, String email, String phoneNumber, String name, List<LockerStatusRecord> records, Locker locker) {
+    public Account(Long id, String schoolNumber, String password, Role role, String email, String phoneNumber, String name, List<LockerStatusRecord> records) {
         this.id = id;
         this.schoolNumber = schoolNumber;
         this.password = password;
@@ -66,6 +56,5 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.records = records;
-        this.locker = locker;
     }
 }

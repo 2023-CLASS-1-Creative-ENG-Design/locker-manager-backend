@@ -2,7 +2,6 @@ package knu.cse.locker.manager.domain.locker.dto.request;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

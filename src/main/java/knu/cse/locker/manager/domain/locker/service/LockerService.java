@@ -1,7 +1,6 @@
 package knu.cse.locker.manager.domain.locker.service;
 
 import knu.cse.locker.manager.domain.account.entity.Account;
-import knu.cse.locker.manager.domain.account.repository.AccountRepository;
 import knu.cse.locker.manager.domain.locker.dto.request.LockerChangeRequestDto;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class LockerService {
-    private final AccountRepository accountRepository;
     private final LockerRepository lockerRepository;
 
     @Transactional
@@ -29,9 +27,10 @@ public class LockerService {
         Locker locker = lockerRepository.findByLockerLocationAndLockerNumber(lockerLocation, lockerNumber)
                         .orElseThrow(() -> new NotFoundException("Locker을 찾을 수 없습니다."));
 
-        accountRepository.save(account.assignLocker(locker));
+        unAssignAccountFromLocker(account); // 기존 연결 끊기
+        locker.assignAccount(account); // 새로운 연결 하기
 
-        return account.getId();
+        return lockerRepository.save(locker).getId();
     }
 
     private LockerLocation getLockerLocationFromName(String lockerName) {
@@ -47,5 +46,12 @@ public class LockerService {
 
     private String getLockerNumberFromName(String lockerName) {
         return lockerName.split("-")[1];
+    }
+
+    private void unAssignAccountFromLocker(Account account) {
+        lockerRepository.findByAccount(account).ifPresent(locker_ -> {
+            locker_.unAssignAccount();
+            lockerRepository.save(locker_);
+        });
     }
 }

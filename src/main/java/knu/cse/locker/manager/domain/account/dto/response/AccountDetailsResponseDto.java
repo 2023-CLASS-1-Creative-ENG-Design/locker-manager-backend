@@ -1,14 +1,15 @@
 package knu.cse.locker.manager.domain.account.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.entity.Role;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
-import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
-import lombok.*;
-
-import javax.persistence.metamodel.StaticMetamodel;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,24 +20,18 @@ public class AccountDetailsResponseDto {
     private String email;
     private String phoneNumber;
     private Role role;
-    private LockerDto locker;
+
+    @JsonProperty("locker")
+    private LockerDto lockerDto;
 
     @Builder
-    public static class LockerDto {
-        private LockerLocation lockerLocation;
-        private String lockerNumber;
-        private String lockerPassword;
-        private Boolean lockerIsBroken;
-    }
-
-    @Builder
-    public AccountDetailsResponseDto(String schoolNumber, String name, String email, String phoneNumber, Role role, LockerDto locker) {
+    public AccountDetailsResponseDto(String schoolNumber, String name, String email, String phoneNumber, Role role, LockerDto lockerDto) {
         this.schoolNumber = schoolNumber;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.role = role;
-        this.locker = locker;
+        this.lockerDto = lockerDto;
     }
 
     public static AccountDetailsResponseDto of(Account account, Locker locker) {
@@ -53,6 +48,6 @@ public class AccountDetailsResponseDto {
                 .email(account.getEmail())
                 .phoneNumber(account.getPhoneNumber())
                 .role(account.getRole())
-                .locker(lockerDto).build();
+                .lockerDto(lockerDto).build();
     }
 }

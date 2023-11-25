@@ -2,11 +2,8 @@ package knu.cse.locker.manager.domain.locker.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import knu.cse.locker.manager.domain.account.dto.response.AccountDetailsResponseDto;
 import knu.cse.locker.manager.domain.account.entity.Account;
-import knu.cse.locker.manager.domain.account.service.AccountService;
 import knu.cse.locker.manager.domain.locker.dto.request.LockerChangeRequestDto;
-import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.service.LockerService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;

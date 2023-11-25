@@ -1,5 +1,6 @@
 package knu.cse.locker.manager.domain.locker.entity;
 
+import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.record.entity.LockerStatusRecord;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -35,8 +36,21 @@ public class Locker {
     private String lockerPassword;
     private Boolean lockerIsBroken;
 
-    @OneToMany(mappedBy = "locker", cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @OneToMany(mappedBy = "locker", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<LockerStatusRecord> records = new ArrayList<>();
+
+    public void assignAccount(Account account) {
+        this.account = account;
+    }
+
+    public void unAssignAccount() {
+        this.account = null;
+        this.records.clear();
+    }
 
     @Builder
     public Locker(Long id, LockerLocation lockerLocation, String lockerNumber, String lockerPassword, Boolean lockerIsBroken, List<LockerStatusRecord> records) {
