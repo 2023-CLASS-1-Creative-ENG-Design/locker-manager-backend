@@ -1,0 +1,3 @@
+[submodule "locker-manager-backend-submodule"]
+	path = locker-manager-backend-submodule
+	url = https://github.com/creative-engineering-design-gui/locker-manager-backend-submodule.git
