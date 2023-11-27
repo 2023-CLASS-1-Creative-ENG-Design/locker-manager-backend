@@ -7,12 +7,15 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://locker_manager_db:3306/PyJGKBcEaamwXQYH6sXs_db
-    username: mRMnzx3tHZhTZxfiNJ75_user
-    password: GjMcGwqz7E3B88CgDwTfrC3GaYnfQf
+    url: jdbc:mysql://locker_manager_db:3306/mysql_database
+    username: mysql_user
+    password: mysql_password
 
   jwt:
-    secret: EMQzjJhWofnR3AMWYNrKwhYuVcDB9ZCmJdXHssUE6CxUZ5unG6nWevjUvSxm
+    secret: jwt_secret
+
+  chain:
+    api-token: block_sdk_api_token
 
 server:
   servlet:
@@ -27,4 +30,4 @@ logging:
     type:
       descriptor:
         sql:
-          BasicBinder: TRACE # Hibernate 5.2 이상 버전에서 사용 가능합니다.
+          BasicBinder: TRACE

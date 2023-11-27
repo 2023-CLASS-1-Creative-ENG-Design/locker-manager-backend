@@ -18,9 +18,9 @@ services:
     image: mysql/mysql-server:8.0
     container_name: locker-manager-mysql
     environment:
-      MYSQL_DATABASE: PyJGKBcEaamwXQYH6sXs_db
-      MYSQL_USER: mRMnzx3tHZhTZxfiNJ75_user
-      MYSQL_PASSWORD: GjMcGwqz7E3B88CgDwTfrC3GaYnfQf
+      MYSQL_DATABASE: mysql_database
+      MYSQL_USER: mysql_user
+      MYSQL_PASSWORD: mysql_password
       TZ: 'Asia/Seoul'
     restart: always
     volumes:
