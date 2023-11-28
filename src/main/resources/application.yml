@@ -17,6 +17,21 @@ spring:
   chain:
     api-token: block_sdk_api_token
 
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+    username: mail_username
+    password: mail_password
+    properties:
+      smtp.auth: true
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+    test-connection: true
+
 server:
   servlet:
     encoding:
