@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "사용자 사물함 관리")
 @RestController
-@RequestMapping("/api/v1/lockers")
+@RequestMapping("/lockers")
 @RequiredArgsConstructor
 public class LockerController {
     private final LockerService lockerService;

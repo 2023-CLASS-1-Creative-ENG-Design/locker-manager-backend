@@ -37,11 +37,11 @@ public class SecurityConfig {
 
         httpSecurity
                 .authorizeRequests()
-                    .antMatchers("/api/v1/admin/**").hasAnyRole("MANAGER")
-                    .antMatchers("/api/v1/accounts/**").hasAnyRole("STUDENT", "MANAGER")
-                    .antMatchers("/api/v1/records/**").hasAnyRole("STUDENT", "MANAGER")
-                    .antMatchers("/api/v1/lockers/**").hasAnyRole("STUDENT", "MANAGER")
-                    .antMatchers("/api/v1/auth/**", "/swagger-ui/**").permitAll();
+                    .antMatchers("/admin/**").hasAnyRole("MANAGER")
+                    .antMatchers("/accounts/**").hasAnyRole("STUDENT", "MANAGER")
+                    .antMatchers("/records/**").hasAnyRole("STUDENT", "MANAGER")
+                    .antMatchers("/lockers/**").hasAnyRole("STUDENT", "MANAGER")
+                    .antMatchers("/auth/**", "/swagger-ui/**").permitAll();
 
         httpSecurity
                 .addFilterBefore(new JwtAuthenticationFilter(accountRepository, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)

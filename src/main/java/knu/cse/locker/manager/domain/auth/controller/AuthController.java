@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 @Tag(name = "사용자 인증")
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;

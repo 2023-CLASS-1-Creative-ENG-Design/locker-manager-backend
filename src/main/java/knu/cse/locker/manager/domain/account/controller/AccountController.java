@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @Tag(name = "사용자 계정")
 @RestController
-@RequestMapping("/api/v1/accounts")
+@RequestMapping("/accounts")
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;

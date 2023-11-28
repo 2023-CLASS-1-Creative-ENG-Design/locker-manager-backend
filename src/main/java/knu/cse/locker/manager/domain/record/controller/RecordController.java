@@ -16,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "사물함 개폐 여부 기록")
 @RestController
-@RequestMapping("/api/v1/records")
+@RequestMapping("/records")
 @RequiredArgsConstructor
 public class RecordController {
     private final RecordService recordService;
