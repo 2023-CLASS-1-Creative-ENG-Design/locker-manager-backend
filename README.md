@@ -1,6 +1,4 @@
-# 경북대학교 컴퓨터학부 사물함 통합 관리 시스템
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-<img src="https://img.shields.io/badge/Release-1.0.0-ec8034" alt="license" data-canonical-src="https://img.shields.io/badge/Release-1.2.0-ec8034" style="max-width: 100%;"></a>
+# 경북대학교 컴퓨터학부 사물함 통합 관리 시스템 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) <img src="https://img.shields.io/badge/Release-1.0.0-ec8034" alt="license" data-canonical-src="https://img.shields.io/badge/Release-1.2.0-ec8034" style="max-width: 100%;"></a>
 
 ## 1. 목적
 "기초창의공학설계" 조별 과제를 기점으로 시작한 프로젝트로, 경북대학교 컴퓨터학부의 학우들이 사물함을 편리하게 관리할 수 있도록 시작한 프로젝트
