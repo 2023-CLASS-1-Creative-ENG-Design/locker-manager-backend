@@ -40,6 +40,9 @@ public class AuthService {
         Account account = accountRepository.findBySchoolNumber(schoolNumber)
                 .orElseThrow(() -> new NotFoundException("계정이 존재하지 않습니다."));
 
+        // 최초 로그인 시 이메일 푸쉬 알람 거부 설정
+        account = accountService.checkFirstLogin(account);
+
         return new LoginResponseDto(account, tokenDto);
     }
 

@@ -43,18 +43,25 @@ public class Account {
     private String email;
     private String phoneNumber;
 
+    private Boolean isPushAlarm;
+
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LockerStatusRecord> records = new ArrayList<>();
 
     @Builder
-    public Account(Long id, String schoolNumber, String password, Role role, String email, String phoneNumber, String name, List<LockerStatusRecord> records) {
+    public Account(Long id, String schoolNumber, String password, Role role, String name, String email, String phoneNumber, Boolean isPushAlarm, List<LockerStatusRecord> records) {
         this.id = id;
         this.schoolNumber = schoolNumber;
         this.password = password;
         this.role = role;
+        this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.name = name;
+        this.isPushAlarm = isPushAlarm;
         this.records = records;
+    }
+
+    public void updatePushAlarm(Boolean isPushAlarm) {
+        this.isPushAlarm = isPushAlarm;
     }
 }

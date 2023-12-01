@@ -22,16 +22,20 @@ public class LoginResponseDto {
 
     private Role role;
 
+    private Boolean isFirstLogin;
+    private Boolean isPushAlarm;
+
     @JsonProperty("token")
     private TokenDto tokenDto;
 
     public LoginResponseDto(Account account, TokenDto tokenDto) {
         this.schoolNumber = account.getSchoolNumber();
-
         this.name = account.getName();
         this.email = account.getEmail();
         this.phoneNumber = account.getPhoneNumber();
         this.role = account.getRole();
+        this.isFirstLogin = (account.getIsPushAlarm() == null);
+        this.isPushAlarm = (account.getIsPushAlarm() != null && account.getIsPushAlarm());
         this.tokenDto = tokenDto;
     }
 }

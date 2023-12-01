@@ -27,6 +27,7 @@ public class RegisterRequestDto {
                 .name(this.name)
                 .email(this.email)
                 .phoneNumber(this.phoneNumber)
+                .isPushAlarm(null)
                 .build();
     }
 }

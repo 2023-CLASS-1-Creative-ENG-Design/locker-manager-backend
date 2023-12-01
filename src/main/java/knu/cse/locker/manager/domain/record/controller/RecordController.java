@@ -8,6 +8,7 @@ import knu.cse.locker.manager.domain.record.entity.LockerStatus;
 import knu.cse.locker.manager.domain.record.service.RecordService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
+import knu.cse.locker.manager.infra.mail.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -20,17 +21,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecordController {
     private final RecordService recordService;
+    private final EmailService emailService;
 
-    @PostMapping("/{status}")
-    @Operation(summary = "사물함 개폐 여부 작성", description = "{status} == open 또는 close")
+    @PostMapping
+    @Operation(summary = "사물함 개폐 여부 작성", description = "status=open 또는 status=close")
     public ApiUtil.ApiSuccessResult<Long> saveLockerStatus (
             Authentication authentication,
-            @PathVariable("status") String status) {
+            @RequestParam("status") String status) {
 
         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
         Account account = userDetails.getAccount();
 
-        Long record_id = recordService.saveLockerStatus(account, LockerStatus.of(status));
+        LockerStatus lockerStatus = LockerStatus.of(status);
+
+        Long record_id = recordService.saveLockerStatus(account, lockerStatus);
+        emailService.sendMail(account, lockerStatus);
 
         return ApiUtil.success(record_id);
     }

@@ -20,17 +20,19 @@ public class AccountDetailsResponseDto {
     private String email;
     private String phoneNumber;
     private Role role;
+    private Boolean isPushAlarm;
 
     @JsonProperty("locker")
     private LockerDto lockerDto;
 
     @Builder
-    public AccountDetailsResponseDto(String schoolNumber, String name, String email, String phoneNumber, Role role, LockerDto lockerDto) {
+    public AccountDetailsResponseDto(String schoolNumber, String name, String email, String phoneNumber, Role role, Boolean isPushAlarm, LockerDto lockerDto) {
         this.schoolNumber = schoolNumber;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.role = role;
+        this.isPushAlarm = isPushAlarm;
         this.lockerDto = lockerDto;
     }
 
@@ -48,6 +50,7 @@ public class AccountDetailsResponseDto {
                 .email(account.getEmail())
                 .phoneNumber(account.getPhoneNumber())
                 .role(account.getRole())
+                .isPushAlarm(account.getIsPushAlarm())
                 .lockerDto(lockerDto).build();
     }
 }

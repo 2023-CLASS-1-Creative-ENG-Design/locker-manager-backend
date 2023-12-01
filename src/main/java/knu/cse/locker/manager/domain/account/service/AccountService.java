@@ -24,11 +24,29 @@ public class AccountService {
         return accountRepository.existsBySchoolNumber(schoolNumber);
     }
 
-    @Transactional
     public AccountDetailsResponseDto getUserInfo(Account account) {
         Locker locker = lockerRepository.findByAccount(account)
                 .orElse(null);
 
         return AccountDetailsResponseDto.of(account, locker);
+    }
+
+    @Transactional
+    public Boolean updatePushAlarm(Account account) {
+        account.updatePushAlarm(account.getIsPushAlarm() == null || !account.getIsPushAlarm());
+
+        accountRepository.save(account);
+        return account.getIsPushAlarm();
+    }
+
+    @Transactional
+    public Account checkFirstLogin(Account account) {
+        if (account.getIsPushAlarm() == null) {
+            account.updatePushAlarm(false);
+
+            return accountRepository.save(account);
+        }
+
+        return account;
     }
 }
