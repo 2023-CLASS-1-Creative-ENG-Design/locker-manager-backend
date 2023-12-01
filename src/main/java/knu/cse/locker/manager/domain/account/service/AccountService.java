@@ -40,13 +40,10 @@ public class AccountService {
     }
 
     @Transactional
-    public Account checkFirstLogin(Account account) {
+    public void checkFirstLogin(Account account) {
         if (account.getIsPushAlarm() == null) {
             account.updatePushAlarm(false);
-
-            return accountRepository.save(account);
+            accountRepository.save(account);
         }
-
-        return account;
     }
 }
