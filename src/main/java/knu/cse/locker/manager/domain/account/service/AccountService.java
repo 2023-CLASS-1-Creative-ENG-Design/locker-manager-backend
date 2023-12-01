@@ -5,6 +5,7 @@ import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.repository.AccountRepository;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
+import knu.cse.locker.manager.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +41,10 @@ public class AccountService {
     }
 
     @Transactional
-    public void checkFirstLogin(Account account) {
+    public void firstLoginAction(String schoolNum) {
+        Account account = accountRepository.findBySchoolNumber(schoolNum)
+                .orElseThrow(() -> new NotFoundException("최초 로그인 업데이트 시도 중 오류 발생"));
+
         if (account.getIsPushAlarm() == null) {
             account.updatePushAlarm(false);
             accountRepository.save(account);

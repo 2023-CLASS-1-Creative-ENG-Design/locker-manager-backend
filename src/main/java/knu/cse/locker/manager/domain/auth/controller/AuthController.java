@@ -43,6 +43,9 @@ public class AuthController {
         String password = loginRequestDto.getPassword();
         LoginResponseDto loginResponseDto = authService.login(schoolNumber, password);
 
+        // 최초 로그인 이벤트
+        accountService.firstLoginAction(schoolNumber);
+
         TokenDto tokenDto = loginResponseDto.getTokenDto();
         String authorization = tokenDto.getGrantType() + " " + tokenDto.getAccessToken();
 
