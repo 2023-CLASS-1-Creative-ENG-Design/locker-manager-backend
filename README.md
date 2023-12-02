@@ -25,4 +25,4 @@
 
 
 ## 4. API 명세서
-[Postman 바로가기](https://www.postman.com/lsangminn200/workspace/new-team-workspace/request/27552399-a1a300f7-ef86-4fc8-8f5c-3e5b3a3af5dc)
+[Postman 바로가기](https://www.postman.com/lsangminn200/workspace/knu-locker-management-system)
