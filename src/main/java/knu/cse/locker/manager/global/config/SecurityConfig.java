@@ -41,7 +41,7 @@ public class SecurityConfig {
                     .antMatchers("/accounts/**").hasAnyRole("STUDENT", "MANAGER")
                     .antMatchers("/records/**").hasAnyRole("STUDENT", "MANAGER")
                     .antMatchers("/lockers/**").hasAnyRole("STUDENT", "MANAGER")
-                    .antMatchers("/auth/**", "/swagger-ui/**").permitAll();
+                    .antMatchers("/auth/**", "/hardware/**", "/swagger-ui/**").permitAll();
 
         httpSecurity
                 .addFilterBefore(new JwtAuthenticationFilter(accountRepository, jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)

@@ -22,16 +22,21 @@ public class LockerService {
     @Transactional
     public Long changeLockerFromAccount(Account account, final LockerChangeRequestDto requestDto) {
         String lockerName = requestDto.getLockerName();
-        LockerLocation lockerLocation = getLockerLocationFromName(lockerName);
-        String lockerNumber = getLockerNumberFromName(lockerName);
 
-        Locker locker = lockerRepository.findByLockerLocationAndLockerNumber(lockerLocation, lockerNumber)
-                        .orElseThrow(() -> new NotFoundException("Locker을 찾을 수 없습니다."));
+        Locker locker = findByLockerName(lockerName);
 
         unAssignAccountFromLocker(account); // 기존 연결 끊기
         locker.assignAccount(account); // 새로운 연결 하기
 
         return lockerRepository.save(locker).getId();
+    }
+
+    public Locker findByLockerName(String lockerName) {
+        LockerLocation lockerLocation = getLockerLocationFromName(lockerName);
+        String lockerNumber = getLockerNumberFromName(lockerName);
+
+        return lockerRepository.findByLockerLocationAndLockerNumber(lockerLocation, lockerNumber)
+                .orElseThrow(() -> new NotFoundException("Locker을 찾을 수 없습니다."));
     }
 
     private LockerLocation getLockerLocationFromName(String lockerName) {

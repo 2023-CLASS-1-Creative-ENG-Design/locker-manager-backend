@@ -18,9 +18,8 @@ public class EmailService {
     private final JavaMailSender javaMailSender;
 
     public void sendMail(Account account, LockerStatus lockerStatus) {
-        if (lockerStatus != LockerStatus.OPEN) {
-            return;
-        }
+        if (!account.getIsPushAlarm()) return;
+        if (lockerStatus != LockerStatus.OPEN) return;
 
         String message =
                 account.getName() + "님의 사물함이 누군가에 의해 개방 되었습니다. " +
