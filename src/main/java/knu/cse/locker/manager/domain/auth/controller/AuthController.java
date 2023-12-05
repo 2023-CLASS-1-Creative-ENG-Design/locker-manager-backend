@@ -27,7 +27,7 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "사용자 회원가입")
     public ApiUtil.ApiSuccessResult<Long> signUp(
-            @Valid @RequestBody RegisterRequestDto requestDto
+            @RequestBody RegisterRequestDto requestDto
     ){
 
         return ApiUtil.success(authService.registerForStudent(requestDto));
