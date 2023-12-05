@@ -2,6 +2,7 @@ package knu.cse.locker.manager.domain.locker.service;
 
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.locker.dto.request.LockerChangeRequestDto;
+import knu.cse.locker.manager.domain.locker.dto.request.LockerPasswordChangeRequestDto;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
@@ -53,5 +54,13 @@ public class LockerService {
             locker_.unAssignAccount();
             lockerRepository.save(locker_);
         });
+    }
+
+    public Long changeLockerPassword(Account account, LockerPasswordChangeRequestDto requestDto) {
+        Locker locker = lockerRepository.findByAccount(account)
+                .orElseThrow(() -> new NotFoundException("사물함이 존재하지 않습니다."));
+
+        locker.assignLockerPassword(requestDto.getLockerPassword());
+        return lockerRepository.save(locker).getId();
     }
 }

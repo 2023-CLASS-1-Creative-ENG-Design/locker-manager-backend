@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.locker.dto.request.LockerChangeRequestDto;
+import knu.cse.locker.manager.domain.locker.dto.request.LockerPasswordChangeRequestDto;
 import knu.cse.locker.manager.domain.locker.service.LockerService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
@@ -25,13 +26,27 @@ public class LockerController {
     @Operation(summary = "사물함 설정 또는 변경")
     public ApiUtil.ApiSuccessResult<Long> changeLocker(
             Authentication authentication,
-            @RequestBody LockerChangeRequestDto lockerChangeRequestDto
+            @RequestBody LockerChangeRequestDto requestDto
     ){
         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
         Account account = userDetails.getAccount();
 
-        Long account_id = lockerService.changeLockerFromAccount(account, lockerChangeRequestDto);
+        Long accountId = lockerService.changeLockerFromAccount(account, requestDto);
 
-        return ApiUtil.success(account_id);
+        return ApiUtil.success(accountId);
+    }
+
+    @PostMapping("/password")
+    @Operation(summary = "사물함 비밀번호 변경")
+    public ApiUtil.ApiSuccessResult<Long> changeLockerPassword(
+            Authentication authentication,
+            @RequestBody LockerPasswordChangeRequestDto requestDto
+    ){
+        PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        Account account = userDetails.getAccount();
+
+        Long lockerId = lockerService.changeLockerPassword(account, requestDto);
+
+        return ApiUtil.success(lockerId);
     }
 }

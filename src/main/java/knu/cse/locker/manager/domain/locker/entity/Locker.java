@@ -47,6 +47,10 @@ public class Locker {
         this.account = account;
     }
 
+    public void assignLockerPassword(String lockerPassword) {
+        this.lockerPassword = lockerPassword;
+    }
+
     public void unAssignAccount() {
         this.account = null;
         this.records.clear();
