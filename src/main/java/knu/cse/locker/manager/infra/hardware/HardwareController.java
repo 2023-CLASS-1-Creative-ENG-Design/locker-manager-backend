@@ -3,18 +3,17 @@ package knu.cse.locker.manager.infra.hardware;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.entity.Account;
-import knu.cse.locker.manager.domain.locker.entity.Locker;
-import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
 import knu.cse.locker.manager.domain.locker.service.LockerService;
 import knu.cse.locker.manager.domain.record.entity.LockerStatus;
 import knu.cse.locker.manager.domain.record.service.RecordService;
 import knu.cse.locker.manager.global.exception.NotFoundException;
-import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import knu.cse.locker.manager.infra.mail.EmailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "하드웨어 제공 API")
 @RestController
@@ -27,7 +26,7 @@ public class HardwareController {
 
     @GetMapping
     @Operation(summary = "사물함 개폐 여부 작성", description = "status=open 또는 status=close, locker=L-60")
-    public ApiUtil.ApiSuccessResult<Long> saveLockerStatus (
+    public ApiUtil.ApiSuccessResult<Long> saveLockerStatusForHardware (
             @RequestParam("status") String status,
             @RequestParam("locker") String locker) {
 
