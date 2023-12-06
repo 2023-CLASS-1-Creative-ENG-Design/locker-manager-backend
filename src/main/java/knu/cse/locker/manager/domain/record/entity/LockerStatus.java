@@ -1,5 +1,7 @@
 package knu.cse.locker.manager.domain.record.entity;
 
+import knu.cse.locker.manager.global.exception.NotFoundException;
+
 public enum LockerStatus {
     OPEN, CLOSE, NONE;
 
@@ -7,7 +9,7 @@ public enum LockerStatus {
         try {
             return LockerStatus.valueOf(status.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return LockerStatus.NONE;
+            throw new NotFoundException("잘못된 요청입니다.");
         }
     }
 }

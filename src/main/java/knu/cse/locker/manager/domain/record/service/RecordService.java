@@ -50,7 +50,7 @@ public class RecordService {
             return record.getLockerStatus();
         } catch (Exception e) {
             log.error("readCurrentLockerStatus() ERROR... " + e);
-            return LockerStatus.NONE;
+            throw new NotFoundException("잘못된 접근입니다.");
         }
     }
 
