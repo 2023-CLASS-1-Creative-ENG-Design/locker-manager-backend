@@ -15,11 +15,13 @@ import java.time.LocalDateTime;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class RecordsResponseDto {
     private LockerStatus lockerStatus;
+    private String address;
     private LocalDateTime createdAt;
 
     @Builder
-    public RecordsResponseDto(LockerStatus lockerStatus, LocalDateTime createdAt) {
+    public RecordsResponseDto(LockerStatus lockerStatus, String address, LocalDateTime createdAt) {
         this.lockerStatus = lockerStatus;
+        this.address = address;
         this.createdAt = createdAt;
     }
 }

@@ -1,5 +1,7 @@
 package knu.cse.locker.manager.test;
 
+import knu.cse.locker.manager.domain.auth.dto.request.RegisterRequestDto;
+import knu.cse.locker.manager.domain.auth.service.AuthService;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
@@ -13,12 +15,15 @@ import java.util.stream.IntStream;
 @Slf4j
 @Component
 public class TestComponent {
+    private final AuthService authService;
     private final LockerRepository lockerRepository;
 
     @Autowired
-    public TestComponent(LockerRepository lockerRepository) {
+    public TestComponent(AuthService authService, LockerRepository lockerRepository) {
+        this.authService = authService;
         this.lockerRepository = lockerRepository;
         setTestDataInLocker();
+        issueManagerAccount();
     }
 
     public void setTestDataInLocker() {
@@ -37,5 +42,15 @@ public class TestComponent {
         lockerRepository.saveAll(lockers);
 
         log.info("테스트 데이터 INSERT 성공");
+    }
+
+    public void issueManagerAccount() {
+        authService.registerForManager(RegisterRequestDto.builder()
+                .schoolNumber("manager")
+                .password("31415926435")
+                .name("관리자")
+                .email("sjsb4838@gmail.com")
+                .phoneNumber("010-3388-8264")
+                .build());
     }
 }

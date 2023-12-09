@@ -1,12 +1,18 @@
 package knu.cse.locker.manager.domain.account.service;
 
 import knu.cse.locker.manager.domain.account.dto.response.AccountDetailsResponseDto;
+import knu.cse.locker.manager.domain.account.dto.response.ChangeEmailRequestDto;
+import knu.cse.locker.manager.domain.account.dto.response.ChangePasswordRequestDto;
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.repository.AccountRepository;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
 import knu.cse.locker.manager.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class AccountService {
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
     private final LockerRepository lockerRepository;
 
@@ -49,5 +57,36 @@ public class AccountService {
             account.updatePushAlarm(false);
             accountRepository.save(account);
         }
+    }
+
+    public void checkCurrentPassword(Account account, String currentPw) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(account.getSchoolNumber(), currentPw);
+
+        authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+    }
+
+    @Transactional
+    public Long changePassword(Account account, ChangePasswordRequestDto requestDto) {
+        String currentPw = requestDto.getCurrentPassword();
+        String newPw = requestDto.getNewPassword();
+
+        checkCurrentPassword(account, currentPw);
+        if (currentPw.equals(newPw)) throw new NotFoundException("똑같은 비밀번호로 변경할 수 없습니다.");
+
+        account.changePassword(passwordEncoder.encode(newPw));
+
+        return accountRepository.save(account).getId();
+    }
+
+    @Transactional
+    public Long changeEmail(Account account, ChangeEmailRequestDto requestDto) {
+        String newEmail = requestDto.getNewEmail();
+
+        if (account.getEmail().equals(newEmail)) throw new NotFoundException("똑같은 이메일로 변경할 수 없습니다.");
+
+        account.changeEmail(newEmail);
+
+        return accountRepository.save(account).getId();
     }
 }

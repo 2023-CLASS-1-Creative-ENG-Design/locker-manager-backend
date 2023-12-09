@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.entity.Role;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,5 +29,14 @@ public class RegisterRequestDto {
                 .email(this.email)
                 .phoneNumber(this.phoneNumber)
                 .build();
+    }
+
+    @Builder
+    public RegisterRequestDto(String schoolNumber, String password, String name, String email, String phoneNumber) {
+        this.schoolNumber = schoolNumber;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 }

@@ -30,6 +30,8 @@ public class LockerStatusRecord {
     @Enumerated(EnumType.STRING)
     private LockerStatus lockerStatus;
 
+    private String address;
+
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -43,9 +45,10 @@ public class LockerStatusRecord {
     private Locker locker;
 
     @Builder
-    public LockerStatusRecord(Long id, LockerStatus lockerStatus, LocalDateTime createdAt, Account account, Locker locker) {
+    public LockerStatusRecord(Long id, LockerStatus lockerStatus, String address, LocalDateTime createdAt, Account account, Locker locker) {
         this.id = id;
         this.lockerStatus = lockerStatus;
+        this.address = address;
         this.createdAt = createdAt;
         this.account = account;
         this.locker = locker;

@@ -8,8 +8,10 @@ services:
     container_name: locker-manager-backend
     depends_on:
       - db
+#      - cache
     links:
       - db:locker_manager_db
+#      - cache:locker_manager_cache
     ports:
       - "43001:8080"
     restart: always
@@ -26,5 +28,14 @@ services:
     volumes:
       - locker-manager-mysql:/var/lib/mysql
 
+#  cache:
+#    image: redis:6.2-alpine
+#    container_name: locker-manager-cache
+#    restart: always
+#    command: redis-server --save 20 1 --loglevel warning
+#    volumes:
+#      - locker-manager-cache:/data
+
 volumes:
   locker-manager-mysql:
+#  locker-manager-cache:

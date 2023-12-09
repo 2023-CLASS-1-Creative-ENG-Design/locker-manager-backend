@@ -3,6 +3,8 @@ package knu.cse.locker.manager.domain.account.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.dto.response.AccountDetailsResponseDto;
+import knu.cse.locker.manager.domain.account.dto.response.ChangeEmailRequestDto;
+import knu.cse.locker.manager.domain.account.dto.response.ChangePasswordRequestDto;
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.service.AccountService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
@@ -10,10 +12,9 @@ import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Tag(name = "사용자 계정")
@@ -39,5 +40,44 @@ public class AccountController {
         Account account = userDetails.getAccount();
 
         return ApiUtil.success(accountService.updatePushAlarm(account));
+    }
+
+    @GetMapping("/password")
+    @Operation(summary = "현재 비밀번호 일치 여부")
+    public ApiUtil.ApiSuccessResult<Long> checkCurrentPw(
+            Authentication authentication,
+            @RequestParam("pw") String currentPw){
+        PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        Account account = userDetails.getAccount();
+
+        accountService.checkCurrentPassword(account, currentPw);
+
+        return ApiUtil.success(account.getId());
+    }
+
+    @PutMapping("/password")
+    @Operation(summary = "비밀번호 변경")
+    public ApiUtil.ApiSuccessResult<Long> changePassword(
+            Authentication authentication,
+            @Valid @RequestBody ChangePasswordRequestDto requestDto){
+        PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        Account account = userDetails.getAccount();
+
+        Long accountId = accountService.changePassword(account, requestDto);
+
+        return ApiUtil.success(accountId);
+    }
+
+    @PutMapping("/email")
+    @Operation(summary = "이메일 변경")
+    public ApiUtil.ApiSuccessResult<Long> changeEmail(
+            Authentication authentication,
+            @Valid @RequestBody ChangeEmailRequestDto requestDto){
+        PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        Account account = userDetails.getAccount();
+
+        Long accountId = accountService.changeEmail(account, requestDto);
+
+        return ApiUtil.success(accountId);
     }
 }

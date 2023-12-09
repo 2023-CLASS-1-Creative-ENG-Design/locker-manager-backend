@@ -61,11 +61,22 @@ public class LockerService {
         });
     }
 
+    @Transactional
     public Long changeLockerPassword(Account account, LockerPasswordChangeRequestDto requestDto) {
         Locker locker = lockerRepository.findByAccount(account)
                 .orElseThrow(() -> new NotFoundException("사물함이 존재하지 않습니다."));
 
         locker.assignLockerPassword(requestDto.getLockerPassword());
+        return lockerRepository.save(locker).getId();
+    }
+
+    @Transactional
+    public Long reportBrokenLocker(Account account) {
+        Locker locker = lockerRepository.findByAccount(account)
+                .orElseThrow(() -> new NotFoundException("사물함이 존재하지 않습니다. 비정상적인 접근"));
+
+        locker.changeBrokenStatus(Boolean.TRUE);
+
         return lockerRepository.save(locker).getId();
     }
 }

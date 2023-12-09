@@ -64,4 +64,12 @@ public class Account {
     public void updatePushAlarm(Boolean isPushAlarm) {
         this.isPushAlarm = isPushAlarm;
     }
+
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
+    public void changeEmail(String email) {
+        this.email = email;
+    }
 }

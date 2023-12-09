@@ -10,10 +10,7 @@ import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "사용자 사물함 관리")
 @RestController
@@ -31,12 +28,12 @@ public class LockerController {
         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
         Account account = userDetails.getAccount();
 
-        Long accountId = lockerService.changeLockerFromAccount(account, requestDto);
+        Long lockerId = lockerService.changeLockerFromAccount(account, requestDto);
 
-        return ApiUtil.success(accountId);
+        return ApiUtil.success(lockerId);
     }
 
-    @PostMapping("/password")
+    @PutMapping("/password")
     @Operation(summary = "사물함 비밀번호 변경")
     public ApiUtil.ApiSuccessResult<Long> changeLockerPassword(
             Authentication authentication,
@@ -48,5 +45,18 @@ public class LockerController {
         Long lockerId = lockerService.changeLockerPassword(account, requestDto);
 
         return ApiUtil.success(lockerId);
+    }
+
+    @PutMapping("/reports")
+    @Operation(summary = "사물함 고장 신고")
+    public ApiUtil.ApiSuccessResult<Long> reportBrokenLocker(
+            Authentication authentication
+    ){
+        PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        Account account = userDetails.getAccount();
+
+        Long accountId = lockerService.reportBrokenLocker(account);
+
+        return ApiUtil.success(accountId);
     }
 }

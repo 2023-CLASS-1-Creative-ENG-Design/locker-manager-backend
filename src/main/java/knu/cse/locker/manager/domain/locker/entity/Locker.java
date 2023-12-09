@@ -51,6 +51,10 @@ public class Locker {
         this.lockerPassword = lockerPassword;
     }
 
+    public void changeBrokenStatus(Boolean lockerIsBroken) {
+        this.lockerIsBroken = lockerIsBroken;
+    }
+
     public void unAssignAccount() {
         this.account = null;
         this.records.clear();

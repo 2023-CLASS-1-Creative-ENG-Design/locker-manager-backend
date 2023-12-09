@@ -57,7 +57,7 @@ public class AuthService {
     }
 
     @Transactional
-    public Long registerForManager(RegisterRequestDto requestDto){
+    public void registerForManager(RegisterRequestDto requestDto){
         if (accountService.isAccountByEmail(requestDto.getEmail())){
             throw new IllegalStateException("중복된 이메일 입니다.");
         }
@@ -66,7 +66,6 @@ public class AuthService {
             throw new IllegalStateException("중복된 학번 입니다.");
         }
 
-        Account account = accountRepository.save(requestDto.toEntity(passwordEncoder, Role.ROLE_MANAGER));
-        return account.getId();
+        accountRepository.save(requestDto.toEntity(passwordEncoder, Role.ROLE_MANAGER));
     }
 }

@@ -8,11 +8,13 @@ import knu.cse.locker.manager.domain.record.entity.LockerStatus;
 import knu.cse.locker.manager.domain.record.entity.LockerStatusRecord;
 import knu.cse.locker.manager.domain.record.repository.RecordRepository;
 import knu.cse.locker.manager.global.exception.NotFoundException;
+import knu.cse.locker.manager.infra.blockchain.BlockChainAPI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -22,6 +24,7 @@ import java.util.List;
 public class RecordService {
     private final RecordRepository recordRepository;
     private final LockerRepository lockerRepository;
+    private final BlockChainAPI blockChainAPI;
 
     @Transactional
     public Long saveLockerStatus(
@@ -31,10 +34,13 @@ public class RecordService {
         Locker locker = lockerRepository.findByAccount(account)
                 .orElseThrow(() -> new NotFoundException("Locker을 찾을 수 없습니다."));
 
+        String address = blockChainAPI.createWallet(new Date().toString());
+
         LockerStatusRecord record = recordRepository.save(LockerStatusRecord.builder()
                 .account(account)
                 .locker(locker)
                 .lockerStatus(lockerStatus)
+                .address(address)
                 .build());
 
         return record.getId();
@@ -61,6 +67,7 @@ public class RecordService {
         return recordRepository.findAllByAccountAndLocker(account, locker).stream()
                 .map(record -> RecordsResponseDto.builder()
                         .lockerStatus(record.getLockerStatus())
+                        .address(record.getAddress())
                         .createdAt(record.getCreatedAt())
                         .build())
                 .toList();
