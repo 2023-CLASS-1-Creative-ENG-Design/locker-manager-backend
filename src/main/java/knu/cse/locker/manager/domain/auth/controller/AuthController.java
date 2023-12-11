@@ -9,6 +9,8 @@ import knu.cse.locker.manager.domain.auth.dto.request.RegisterRequestDto;
 import knu.cse.locker.manager.domain.auth.dto.response.LoginResponseDto;
 import knu.cse.locker.manager.domain.auth.service.AuthService;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
+import knu.cse.locker.manager.infra.authcode.AuthcodeService;
+import knu.cse.locker.manager.infra.mail.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,9 @@ import javax.validation.Valid;
 public class AuthController {
     private final AuthService authService;
     private final AccountService accountService;
+    private final AuthcodeService authcodeService;
+    private final EmailService emailService;
+
     @PostMapping("/register")
     @Operation(summary = "사용자 회원가입")
     public ApiUtil.ApiSuccessResult<Long> signUp(
@@ -78,4 +83,27 @@ public class AuthController {
 
         return ApiUtil.success("사용 가능한 학번 입니다.");
     }
+
+    @GetMapping("/send-email")
+    @Operation(summary = "인증 번호 이메일 보내기")
+    public ApiUtil.ApiSuccessResult<String> sendAuthCodeFromEmail(
+            @RequestParam("email") String email
+    ) {
+        String authcode = authcodeService.createCode();
+        emailService.sendAuthcodeMail(email, authcode);
+
+        return ApiUtil.success("사용 가능한 학번 입니다.");
+    }
+
+    @GetMapping("/valid-email")
+    @Operation(summary = "인증 번호 유효성 확인")
+    public ApiUtil.ApiSuccessResult<String> sendAuthCodeFromEmail(
+            @RequestParam("email") String email,
+            @RequestParam("code") String code
+    ) {
+        authcodeService.validCode(email, code);
+
+        return ApiUtil.success("사용 가능한 학번 입니다.");
+    }
+
 }

@@ -9,6 +9,8 @@ import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.service.AccountService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
+import knu.cse.locker.manager.global.utils.redis.RedisUtil;
+import knu.cse.locker.manager.infra.authcode.AuthcodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
+    private final AuthcodeService authcodeService;
 
     @GetMapping
     @Operation(summary = "사용자 정보 조회")
@@ -72,11 +75,16 @@ public class AccountController {
     @Operation(summary = "이메일 변경")
     public ApiUtil.ApiSuccessResult<Long> changeEmail(
             Authentication authentication,
+            @RequestParam String code,
             @Valid @RequestBody ChangeEmailRequestDto requestDto){
         PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
         Account account = userDetails.getAccount();
 
+        authcodeService.checkedFromAuthCode(code);
+
         Long accountId = accountService.changeEmail(account, requestDto);
+
+        authcodeService.delCodeFromRedis(code);
 
         return ApiUtil.success(accountId);
     }
