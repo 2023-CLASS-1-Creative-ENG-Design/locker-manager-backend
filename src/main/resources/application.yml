@@ -17,9 +17,9 @@ spring:
   chain:
     api-token: block_sdk_api_token
 
-#  redis:
-#    host: locker_manager_cache
-#    port: 6379
+  redis:
+    host: locker_manager_cache
+    port: 6379
 
   mail:
     protocol: smtp
