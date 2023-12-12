@@ -1,12 +1,22 @@
 package knu.cse.locker.manager.global.security.details;
 
-import knu.cse.locker.manager.domain.account.entity.Account;
-import knu.cse.locker.manager.domain.account.repository.AccountRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import knu.cse.locker.manager.domain.account.entity.Account;
+import knu.cse.locker.manager.domain.account.repository.AccountRepository;
+import lombok.RequiredArgsConstructor;
+
+/* 
+ * PrincipalDetailsService.java
+ *
+ * @note spring security에서 사용자 정보를 관리하는 클래스
+ *
+ * @see knu.cse.locker.manager.domain.account.entity.Account
+ *
+ */
 
 @Service
 @RequiredArgsConstructor

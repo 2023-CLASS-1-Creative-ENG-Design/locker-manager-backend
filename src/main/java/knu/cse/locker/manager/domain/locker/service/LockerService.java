@@ -1,5 +1,8 @@
 package knu.cse.locker.manager.domain.locker.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.locker.dto.request.LockerChangeRequestDto;
 import knu.cse.locker.manager.domain.locker.dto.request.LockerPasswordChangeRequestDto;
@@ -8,11 +11,16 @@ import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
 import knu.cse.locker.manager.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
+/* 
+ * LockerService.java
+ *
+ * @note 사용자 사물함 관리 비즈니스 로직을 담당하는 서비스
+ *
+ * @see knu.cse.locker.manager.domain.locker.controller.LockerController
+ *
+ */
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)

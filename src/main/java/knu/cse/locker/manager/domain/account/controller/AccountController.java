@@ -1,5 +1,15 @@
 package knu.cse.locker.manager.domain.account.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.dto.response.AccountDetailsResponseDto;
@@ -9,16 +19,22 @@ import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.service.AccountService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
-import knu.cse.locker.manager.global.utils.redis.RedisUtil;
 import knu.cse.locker.manager.infra.authcode.AuthcodeService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+/*
+ * AccountController.java
+ * 
+ * @note 사용자 계정 관련 API를 제공하는 컨트롤러
+ * 
+ * GET /accounts : 사용자 정보 조회
+ * PUT /accounts/push-alarm : 푸쉬알람 동의하기
+ * GET /accounts/password : 현재 비밀번호 일치 여부
+ * PUT /accounts/password : 비밀번호 변경
+ * PUT /accounts/email : 이메일 변경
+ * 
+ */
 
-@Slf4j
 @Tag(name = "사용자 계정")
 @RestController
 @RequestMapping("/accounts")

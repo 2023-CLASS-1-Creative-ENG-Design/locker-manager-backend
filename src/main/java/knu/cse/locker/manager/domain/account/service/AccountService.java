@@ -1,5 +1,11 @@
 package knu.cse.locker.manager.domain.account.service;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import knu.cse.locker.manager.domain.account.dto.response.AccountDetailsResponseDto;
 import knu.cse.locker.manager.domain.account.dto.response.ChangeEmailRequestDto;
 import knu.cse.locker.manager.domain.account.dto.response.ChangePasswordRequestDto;
@@ -9,12 +15,14 @@ import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
 import knu.cse.locker.manager.global.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+/* AccountService.java
+ *
+ * @note 사용자 계정 관련 비즈니스 로직을 담당하는 서비스
+ *
+ * @see knu.cse.locker.manager.domain.account.controller.AccountController
+ *
+ */
 
 @Service
 @Transactional(readOnly = true)

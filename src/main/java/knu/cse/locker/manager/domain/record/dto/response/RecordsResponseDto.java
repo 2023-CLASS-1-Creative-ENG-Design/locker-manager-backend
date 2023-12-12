@@ -1,14 +1,24 @@
 package knu.cse.locker.manager.domain.record.dto.response;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import knu.cse.locker.manager.domain.record.entity.LockerStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+/* 
+ * RecordsResponseDto.java
+ *
+ * @note 사물함 변경 API 요청에 사용되는 DTO
+ *
+ * @see knu.cse.locker.manager.domain.record.controller.RecordController#updateRecord(RecordsResponseDto)
+ *
+ */
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

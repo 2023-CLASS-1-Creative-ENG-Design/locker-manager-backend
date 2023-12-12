@@ -1,14 +1,22 @@
 package knu.cse.locker.manager.infra.authcode;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Random;
+
+import org.springframework.stereotype.Service;
+
 import knu.cse.locker.manager.global.exception.NotFoundException;
 import knu.cse.locker.manager.global.utils.redis.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
+/*
+ * AuthcodeService.java
+ *
+ * @note 인증 코드 생성 및 검증을 위한 서비스
+ *
+ */
 
 @Slf4j
 @Service

@@ -2,6 +2,15 @@ package knu.cse.locker.manager.global.utils.api;
 
 import lombok.Getter;
 
+/* 
+ * ApiUtil.java
+ *
+ * @note API 응답에 사용되는 유틸 클래스
+ *
+ * @see knu.cse.locker.manager.domain.account.controller.AccountController#updateAccountEmail(ChangeEmailRequestDto, Authentication)
+ *
+ */
+
 public class ApiUtil {
 
     public static <T> ApiSuccessResult<T> success(T response) {

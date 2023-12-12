@@ -1,5 +1,10 @@
 package knu.cse.locker.manager.infra.hardware;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.entity.Account;
@@ -10,10 +15,15 @@ import knu.cse.locker.manager.global.exception.NotFoundException;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import knu.cse.locker.manager.infra.mail.EmailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+/*
+ * HardwareController.java
+ * 
+ * @note 하드웨어 제공 API
+ * 
+ * GET /hardware : 사물함 개폐 여부 작성
+ * 
+ */
 
 @Tag(name = "하드웨어 제공 API")
 @RestController

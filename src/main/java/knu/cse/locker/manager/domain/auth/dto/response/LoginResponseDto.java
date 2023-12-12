@@ -3,12 +3,22 @@ package knu.cse.locker.manager.domain.auth.dto.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.entity.Role;
 import knu.cse.locker.manager.domain.auth.dto.TokenDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+/* 
+ * LoginResponseDto.java
+ *
+ * @note 로그인 API 응답에 사용되는 DTO
+ *
+ * @see knu.cse.locker.manager.domain.auth.controller.AuthController#login(LoginRequestDto)
+ *
+ */
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

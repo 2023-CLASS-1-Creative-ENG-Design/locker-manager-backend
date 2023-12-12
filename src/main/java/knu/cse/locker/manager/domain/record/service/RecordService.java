@@ -1,5 +1,11 @@
 package knu.cse.locker.manager.domain.record.service;
 
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
@@ -11,11 +17,15 @@ import knu.cse.locker.manager.global.exception.NotFoundException;
 import knu.cse.locker.manager.infra.blockchain.BlockChainAPI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+/* 
+ * RecordService.java
+ *
+ * @note 사물함 상태 기록 관리 비즈니스 로직을 담당하는 서비스
+ *
+ * @see knu.cse.locker.manager.domain.record.controller.RecordController
+ *
+ */
 
 @Slf4j
 @Service

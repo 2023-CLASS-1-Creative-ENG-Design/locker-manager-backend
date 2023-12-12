@@ -1,5 +1,14 @@
 package knu.cse.locker.manager.domain.record.controller;
 
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.entity.Account;
@@ -10,13 +19,18 @@ import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import knu.cse.locker.manager.infra.mail.EmailService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+/* 
+ * RecordController.java
+ *
+ * @note 사물함 개폐 여부 기록 관련 API를 제공하는 컨트롤러
+ *
+ * POST /records : 사물함 개폐 여부 기록
+ * GET /records/now : 사물함 현재 개폐 여부 상태 조회
+ * GET /records : 사물함 개폐 여부 전체 조회
+ *
+ */
 
-@Slf4j
 @Tag(name = "사물함 개폐 여부 기록")
 @RestController
 @RequestMapping("/records")

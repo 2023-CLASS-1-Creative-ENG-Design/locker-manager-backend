@@ -3,6 +3,7 @@ package knu.cse.locker.manager.domain.account.dto.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.entity.Role;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
@@ -10,6 +11,16 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+/*
+ * AccountDetailsResponseDto.java
+ *
+ * @note 사용자 정보 조회 API 응답에 사용되는 DTO
+ *
+ * @see knu.cse.locker.manager.domain.account.controller.AccountController#readAccountDetails(Authentication)
+ * @see knu.cse.locker.manager.domain.account.service.AccountService#getUserInfo(Account)
+ *
+ */
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

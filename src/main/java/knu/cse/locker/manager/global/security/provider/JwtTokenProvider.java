@@ -1,13 +1,13 @@
 package knu.cse.locker.manager.global.security.provider;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-import knu.cse.locker.manager.domain.account.entity.Account;
-import knu.cse.locker.manager.domain.account.repository.AccountRepository;
-import knu.cse.locker.manager.domain.auth.dto.TokenDto;
-import knu.cse.locker.manager.global.security.details.PrincipalDetails;
-import lombok.extern.slf4j.Slf4j;
+import java.security.Key;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,12 +16,28 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.stream.Collectors;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import knu.cse.locker.manager.domain.account.entity.Account;
+import knu.cse.locker.manager.domain.account.repository.AccountRepository;
+import knu.cse.locker.manager.domain.auth.dto.TokenDto;
+import knu.cse.locker.manager.global.security.details.PrincipalDetails;
+import lombok.extern.slf4j.Slf4j;
+
+/*
+ * JwtTokenProvider.java
+ *
+ * @note JWT 토큰 생성 및 검증을 담당하는 클래스
+ *
+ * @see knu.cse.locker.manager.domain.account.entity.Account
+ *
+ */
 
 @Slf4j
 @Component

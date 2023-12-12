@@ -1,13 +1,23 @@
 package knu.cse.locker.manager.global.security.details;
 
-import knu.cse.locker.manager.domain.account.entity.Account;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import knu.cse.locker.manager.domain.account.entity.Account;
+
+/* 
+ * PrincipalDetails.java
+ *
+ * @note spring security에서 사용자 정보를 관리하는 클래스
+ *
+ * @see knu.cse.locker.manager.domain.account.entity.Account
+ *
+ */
 
 public record PrincipalDetails(Account account) implements UserDetails {
 

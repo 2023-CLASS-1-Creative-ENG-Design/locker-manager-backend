@@ -1,9 +1,5 @@
 package knu.cse.locker.manager.global.config;
 
-import knu.cse.locker.manager.domain.account.repository.AccountRepository;
-import knu.cse.locker.manager.global.security.filter.JwtAuthenticationFilter;
-import knu.cse.locker.manager.global.security.provider.JwtTokenProvider;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +11,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import knu.cse.locker.manager.domain.account.repository.AccountRepository;
+import knu.cse.locker.manager.global.security.filter.JwtAuthenticationFilter;
+import knu.cse.locker.manager.global.security.provider.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
+
+/* 
+ * SecurityConfig.java
+ *
+ * @note Spring Security 설정
+ *
+ */
 
 @Configuration
 @EnableWebSecurity

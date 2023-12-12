@@ -1,22 +1,37 @@
 package knu.cse.locker.manager.domain.record.entity;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
-
-/**
- * @note 사물함 개폐 여부를 저장하는 ENTITY
- * *
- * lockerStatus 사물함 개폐 여부
- * createdAt 현재 시간
+/* 
+ * LockerStatusRecord.java
+ *
+ * @note 사물함 변경 기록
+ *
+ * @see knu.cse.locker.manager.domain.record.controller.RecordController
+ *
  */
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

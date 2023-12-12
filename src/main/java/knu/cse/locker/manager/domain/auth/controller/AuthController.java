@@ -1,5 +1,17 @@
 package knu.cse.locker.manager.domain.auth.controller;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.service.AccountService;
@@ -12,12 +24,19 @@ import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import knu.cse.locker.manager.infra.authcode.AuthcodeService;
 import knu.cse.locker.manager.infra.mail.EmailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+/* AuthController.java
+ *
+ * @note 사용자 인증 관련 API를 제공하는 컨트롤러
+ *
+ * POST /auth/register : 사용자 회원가입
+ * POST /auth/login : 사용자 로그인
+ * GET /auth/email-valid : 이메일 중복 확인
+ * GET /auth/school-num-valid : 학번 중복 확인
+ * GET /auth/send-email : 인증 번호 이메일 보내기
+ * GET /auth/valid-email : 인증 번호 유효성 확인
+ *
+ */
 
 @Tag(name = "사용자 인증")
 @RestController

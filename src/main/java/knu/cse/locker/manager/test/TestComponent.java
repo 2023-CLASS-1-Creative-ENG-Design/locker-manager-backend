@@ -1,16 +1,24 @@
 package knu.cse.locker.manager.test;
 
+import java.util.List;
+import java.util.stream.IntStream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import knu.cse.locker.manager.domain.auth.dto.request.RegisterRequestDto;
 import knu.cse.locker.manager.domain.auth.service.AuthService;
 import knu.cse.locker.manager.domain.locker.entity.Locker;
 import knu.cse.locker.manager.domain.locker.entity.LockerLocation;
 import knu.cse.locker.manager.domain.locker.repository.LockerRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.IntStream;
+/*
+ * TestComponent.java
+ *
+ * @note 테스트를 위한 컴포넌트
+ *
+ */
 
 @Slf4j
 @Component

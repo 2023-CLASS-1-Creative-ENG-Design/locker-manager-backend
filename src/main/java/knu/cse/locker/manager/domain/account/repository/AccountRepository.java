@@ -1,10 +1,19 @@
 package knu.cse.locker.manager.domain.account.repository;
 
 
-import knu.cse.locker.manager.domain.account.entity.Account;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import knu.cse.locker.manager.domain.account.entity.Account;
+
+/* AccountRepository.java
+ *
+ * @note 사용자 계정 정보를 관리하는 Repository
+ *
+ * @see knu.cse.locker.manager.domain.account.entity.Account
+ *
+ */
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findBySchoolNumber(String schoolNumber);

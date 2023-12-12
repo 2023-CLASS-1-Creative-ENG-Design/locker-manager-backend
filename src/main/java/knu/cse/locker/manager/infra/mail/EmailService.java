@@ -1,18 +1,24 @@
 package knu.cse.locker.manager.infra.mail;
 
-import knu.cse.locker.manager.domain.account.entity.Account;
-import knu.cse.locker.manager.domain.record.entity.LockerStatus;
-import knu.cse.locker.manager.global.utils.redis.RedisUtil;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import knu.cse.locker.manager.domain.account.entity.Account;
+import knu.cse.locker.manager.domain.record.entity.LockerStatus;
+import knu.cse.locker.manager.global.utils.redis.RedisUtil;
+import lombok.RequiredArgsConstructor;
 
-@Slf4j
+/*
+ * EmailService.java
+ *
+ * @note 이메일 전송 서비스
+ *
+ */
+
 @Service
 @RequiredArgsConstructor
 public class EmailService {

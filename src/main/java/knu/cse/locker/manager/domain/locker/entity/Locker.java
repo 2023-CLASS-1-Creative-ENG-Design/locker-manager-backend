@@ -1,5 +1,20 @@
 package knu.cse.locker.manager.domain.locker.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.record.entity.LockerStatusRecord;
 import lombok.AccessLevel;
@@ -7,19 +22,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-
-/**
- * @note 사물함 정보 및 상태를 관리 하는 ENTITY
- * *
- * lockerLocation 사물함 위치
- * lockerNumber 사물함 번호
- * lockerPassword 사물함 비밀번호
- * lockerIsBroken 사물함 고장 여부
+/* 
+ * Locker.java
+ *
+ * @note 사물함 정보
+ *
+ * @see knu.cse.locker.manager.domain.locker.controller.LockerController
+ *
  */
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

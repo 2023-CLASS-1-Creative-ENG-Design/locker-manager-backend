@@ -1,5 +1,12 @@
 package knu.cse.locker.manager.domain.locker.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import knu.cse.locker.manager.domain.account.entity.Account;
@@ -9,8 +16,17 @@ import knu.cse.locker.manager.domain.locker.service.LockerService;
 import knu.cse.locker.manager.global.security.details.PrincipalDetails;
 import knu.cse.locker.manager.global.utils.api.ApiUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+
+/* 
+ * LockerController.java
+ *
+ * @note 사용자 사물함 관리 API를 제공하는 컨트롤러
+ *
+ * POST /lockers : 사물함 설정 또는 변경
+ * PUT /lockers/password : 사물함 비밀번호 변경
+ * PUT /lockers/reports : 사물함 고장 신고
+ *
+ */
 
 @Tag(name = "사용자 사물함 관리")
 @RestController

@@ -1,26 +1,35 @@
 package knu.cse.locker.manager.domain.account.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+
 import knu.cse.locker.manager.domain.record.entity.LockerStatusRecord;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * @note 사용자 계정의 정보를 담은 ENTITY
- * *
- * schoolNumber 학번
- * password 비밀번호
- * role 역할
- * email 이메일
- * phoneNumber 휴대폰 전화번호
- * name 이름
+/* 
+ * Account.java
+ *
+ * @note 사용자 계정 정보
+ *
+ * @see knu.cse.locker.manager.domain.account.controller.AccountController
+ *
  */
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

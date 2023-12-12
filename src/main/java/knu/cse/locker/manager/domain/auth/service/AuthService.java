@@ -1,5 +1,12 @@
 package knu.cse.locker.manager.domain.auth.service;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import knu.cse.locker.manager.domain.account.entity.Account;
 import knu.cse.locker.manager.domain.account.entity.Role;
 import knu.cse.locker.manager.domain.account.repository.AccountRepository;
@@ -10,12 +17,15 @@ import knu.cse.locker.manager.domain.auth.dto.response.LoginResponseDto;
 import knu.cse.locker.manager.global.exception.NotFoundException;
 import knu.cse.locker.manager.global.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+/* 
+ * AuthService.java
+ *
+ * @note 사용자 인증 관련 비즈니스 로직을 담당하는 서비스
+ *
+ * @see knu.cse.locker.manager.domain.auth.controller.AuthController
+ *
+ */
 
 @Service
 @RequiredArgsConstructor

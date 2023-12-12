@@ -1,10 +1,18 @@
 package knu.cse.locker.manager.global.utils.redis;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Duration;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import java.time.Duration;
+import lombok.RequiredArgsConstructor;
+
+/* 
+ * RedisUtil.java
+ *
+ * @note Redis를 사용하기 위한 유틸 클래스
+ *
+ */
 
 @Component
 @RequiredArgsConstructor

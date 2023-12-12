@@ -2,6 +2,15 @@ package knu.cse.locker.manager.domain.record.entity;
 
 import knu.cse.locker.manager.global.exception.NotFoundException;
 
+/* 
+ * LockerStatus.java
+ *
+ * @note 사물함 상태
+ *
+ * @see knu.cse.locker.manager.domain.record.entity.Record
+ *
+ */
+
 public enum LockerStatus {
     OPEN, CLOSE, NONE;
 
